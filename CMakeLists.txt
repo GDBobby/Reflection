@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 3.22)
+
+
+project(trunk-experiment)
+
+set(CMAKE_CXX_STANDARD 26)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(${PROJECT_NAME} "main.cpp")
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT ${PROJECT_NAME})
+
+
+if(OUTPUT_POSTFIX)
+    set_target_properties(${PROJECT_NAME} PROPERTIES 
+        DEBUG_POSTFIX "${OUTPUT_POSTFIX}"
+        RELEASE_POSTFIX "${OUTPUT_POSTFIX}"
+    )
+endif()
+
+
+target_link_libraries(${PROJECT_NAME} PUBLIC)
+
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+    VS_DEBUGGER_WORKING_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}"
+)
